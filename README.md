@@ -12,3 +12,5 @@ Ideas:
 
 
 Recipe dataset: Recipe1M+: A Dataset for Learning Cross-Modal Embeddings for Cooking Recipes and Food Images. Marin, Javier and Biswas, Aritro and Ofli, Ferda and Hynes, Nicholas and Salvador, Amaia and Aytar, Yusuf and Weber, Ingmar and Torralba, Antonio, 2019 (http://pic2recipe.csail.mit.edu/)
+
+Kaggle Food ingredients dataset for Vocabulary: https://www.kaggle.com/kaggle/recipe-ingredients-dataset/data#
