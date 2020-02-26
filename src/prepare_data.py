@@ -6,6 +6,9 @@ import spacy
 nlp_model = spacy.load('en')
 from collections import Counter
 import itertools
+from spacy.lang.en.stop_words import STOP_WORDS
+import random
+
 
 '''
 prepare dataset in the following format
@@ -19,7 +22,9 @@ class data_handling:
 
     X = []
     y = []
-    ''' extract recipe instructions and ingredients form 1Mrecipe data and save in format of y'''
+    '''
+    extract recipe instructions and ingredients form 1Mrecipe data and save in format of y
+    '''
     def transform_json(self):
         with open('../data/layer1.json') as file:
             data = json.load(file)
@@ -30,7 +35,9 @@ class data_handling:
                 self.y.append((ingredients, instructions))
         pickle.dump(self.y, open( "../data/data_y.p", "wb" ))
 
-    '''ingredient words to sort out'''
+    '''
+    ingredient words to sort out
+    '''
     def create_vocabulary(self):
         v = []
         with open('../data/train.json') as file1, open('../data/test.json') as file2:
@@ -49,8 +56,10 @@ class data_handling:
             for item in vocabulary:
                 f.write("%s\n" % item)
         f.close()
-        #pickle.dump(vocabulary, open("../data/vocab.p", "wb"))
 
+    '''
+    set of all food stuffs in ingredients dataset
+    '''
     def create_compound_vocabulary(self):
         tokenized_veggies = []
         with open('../data/veggies.txt') as veggies:
@@ -71,12 +80,16 @@ class data_handling:
                             lemmatized += f" {token.lemma_}"
                         my_veggies.append(lemmatized.strip().lower())
 
-        # my_veggies = list(set(my_veggies))
-        with open('../data/my_veggies_list.txt', 'w') as f:
+        my_veggies = list(set(my_veggies))
+        with open('../data/my_veggies.txt', 'w') as f:
             for item in my_veggies:
                 f.write("%s\n" % item)
 
-    def create_trainset_vocabulary(self):
+    '''
+    create vocubulary of most common veggie words in instruction
+    for computational reasons just use subset of 1500 recipes to base decision on
+    '''
+    def create_instruction_vocabulary(self):
         tokenized_veggies = []
         with open('../data/veggies.txt') as veggies:
             for line in veggies:
@@ -86,37 +99,32 @@ class data_handling:
                     lemmatized += f" {token.lemma_}"
                 tokenized_veggies.append(lemmatized.strip().lower())
 
-        my_veggies_trainset = []
         y = pickle.load(open("../data/data_y.p", "rb"))
-        ingredients = list(list(zip(*y))[0])
-        ingredients_merged = list(itertools.chain(*ingredients))
-        delete_numbers = lambda x: ''.join([i for i in x if not i.isdigit()]).strip()
-        ingredients_merged = list(map(delete_numbers, ingredients_merged))
-        words_to_count = (word for word in ingredients_merged)
-        c = Counter(words_to_count)
-        most_common = c.most_common(500)
-        print(most_common)
-        pickle.dump(most_common, open("../data/most_common.p", "wb"))
+        instructions = list(list(zip(*y))[1])
+        random.shuffle(instructions)
+        instructions = instructions[:1500]
 
-    '''keep only n most common veggies'''
-    def filter_vocab(self):
-        self.y = pickle.load(open("../data/data_y.p", "rb"))
-        with open('../data/my_veggies.txt') as my_veggies:
-            my_veggies_dict = {v:0 for v in my_veggies}
-            for line in my_veggies_dict.keys():
-                c = 0
-                for elem in self.y:
-                    for ingredient in elem[0]:
-                        lemmatized = ''
-                        for token in nlp_model(ingredient.strip()):
-                            lemmatized += f" {token.lemma_}"
-                        lemmatized = lemmatized.strip().lower()
-                        if line.strip() in lemmatized:
-                            c+=1
-                my_veggies_dict[line] = c
-            print(my_veggies_dict)
-            pickle.dump(my_veggies_dict, open( "../data/veggies_counted.p", "wb" ))
+        instructions_merged = ' '.join(instructions)
+        instructions_merged = ''.join([i for i in instructions_merged if not i.isdigit()]).strip()
+
+        #  lemmatize and only keep veggies
+        doc = nlp_model(instructions_merged)
+        filtered_sentence = []
+        for token in doc:
+            lemmatized = token.lemma_
+            if lemmatized in tokenized_veggies:
+                filtered_sentence.append(lemmatized)
+
+        words_to_count = (word for word in filtered_sentence)
+        c = Counter(words_to_count)
+        most_common = c.most_common(100)
+        with open('../data/most_common.txt', 'w') as f:
+            for w in most_common:
+                print(w)
+                f.write(f"{w[0]}\n")
+        f.close()
+
 
 if __name__ == '__main__':
     dh = data_handling()
-    dh.create_trainset_vocabulary()
+    dh.create_instruction_vocabulary()

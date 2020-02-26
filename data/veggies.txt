@@ -21,6 +21,7 @@ chayotes
 garbanzo
 figs
 bellpepper
+bell pepper
 scallion
 rutabaga
 Bouillon
@@ -112,7 +113,6 @@ radish
 hakusai
 collard
 orzo
-pepper
 nopales
 tatsoi
 Pepperoni
@@ -166,7 +166,6 @@ Reblochon
 spinach
 spaghetti
 beans
-pepper
 vidalia
 broccolini
 taro
@@ -241,7 +240,6 @@ nopalitos
 peppers
 rhubarb
 chard
-Pepper
 piquillo
 cardoons
 konnyaku
