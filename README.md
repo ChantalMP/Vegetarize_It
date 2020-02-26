@@ -1,5 +1,13 @@
 # Vegetarize_It
 
+
+### Data Preparation
+Given recipe and ingredients data:
+- manually extract possible meat substitutes and meat types in two lists
+- given training data recipes, collect most common vegetarian products in instructions
+
+### Thoughts
+
 Input: recipe
 Output: same recipe but without meat products
 
