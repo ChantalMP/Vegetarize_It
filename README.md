@@ -1,15 +1,6 @@
 # Vegetarize_It
 
-
-### Data Preparation
-Given recipe and ingredients data:
-- manually extract possible meat substitutes and meat types in two lists
-- given training data recipes, collect most common vegetarian products in instructions
-
-### Thoughts
-
-Input: recipe
-Output: same recipe without meat products
+Detects meat products in recipes and replaces them with a suitable vegetarian alternative.
 
 Based on [FoodBERT](https://github.com/ChantalMP/Exploiting-Food-Embeddings-for-Ingredient-Substitution).
 
