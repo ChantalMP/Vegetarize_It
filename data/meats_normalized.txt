@@ -288,3 +288,5 @@ boneles
 loin
 shoulder
 quail
+chicken_stock
+beef_stock
