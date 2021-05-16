@@ -1,16 +1,10 @@
 # Vegetarize_It
 
 Input: recipe
-Output: same recipe but without meat products
+Output: same recipe without meat products
 
-Ideas:
-- for training: vegetarian recipes -> recognize all vegetables/ meat replacements -> mask them -> try to recreate same recipe
-- for using: mask all meat products in meat recipe -> input in same system
-- masking: NER or gazeteers
-- first stage: only delete spezific products
-- second stage: also delete how to use them (fry, cook, etc)
+Based on [FoodBERT](https://github.com/ChantalMP/Exploiting-Food-Embeddings-for-Ingredient-Substitution).
 
+Example:
 
-Recipe dataset: Recipe1M+: A Dataset for Learning Cross-Modal Embeddings for Cooking Recipes and Food Images. Marin, Javier and Biswas, Aritro and Ofli, Ferda and Hynes, Nicholas and Salvador, Amaia and Aytar, Yusuf and Weber, Ingmar and Torralba, Antonio, 2019 (http://pic2recipe.csail.mit.edu/)
-
-Kaggle Food ingredients dataset for Vocabulary: https://www.kaggle.com/kaggle/recipe-ingredients-dataset/data#
+Whisk together the yogurt, lemon juice, turmeric, garam masala and cumin in a large bowl. Put the <span style="color:orange;">chicken</span> in, and coat with the marinade. Cover, and refrigerate (for up to a day). Add the chicken and marinade to the pan, and cook for 5 minutes, then add the chicken stock. Bring the mixture to a boil, then lower the heat and simmer, uncovered, for approximately 30 minutes. Stir in the cream and tomato paste, and simmer until the chicken is cooked through, approximately 10 to 15 minutes. Add the almonds, cook for an additional 5 minutes and remove from the heat. Garnish with the cilantro leaves.
