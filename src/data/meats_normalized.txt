@@ -248,13 +248,11 @@ ribeye
 chuck_roll
 rump_tail
 flank_steak
-trim
 whole_side
 top_bit
 rump
 loin
 fore_rib
-short
 pony
 shin
 flank
@@ -290,3 +288,4 @@ shoulder
 quail
 chicken_stock
 beef_stock
+cod
