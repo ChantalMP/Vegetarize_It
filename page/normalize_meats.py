@@ -2,7 +2,7 @@ from Foodbert.normalisation.helpers.recipe_normalizer import RecipeNormalizer
 
 if __name__ == '__main__':
     recipe_normalizer = RecipeNormalizer(lemmatization_types=['NOUN'])
-    with open('data/meats.txt') as f:
+    with open('meats.txt') as f:
         meat_ingredients = f.read().splitlines()
 
     meat_ingredients_normalized = recipe_normalizer.normalize_ingredients(meat_ingredients, strict=False)

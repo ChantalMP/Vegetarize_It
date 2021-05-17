@@ -151,6 +151,8 @@ class ContextualizedSubstitutes:
             recipe_text = ' ' + recipe_text + ' '
             recipe_text = recipe_text.replace(f' {ingredient_to_replace} ', f' {substitute} ')
             recipe_text = recipe_text.replace(' !', '!').replace(' ?', '?').replace(' .', '.').replace(' :', ':').replace(' ,', ',')
+            ingredient_to_replace = ingredient_to_replace.replace('_', ' ')
+            substitute = substitute.replace('_', ' ')
             substitute_dict[ingredient_to_replace] = substitute
 
         recipe_text = recipe_text.replace('_', ' ')

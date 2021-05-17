@@ -10,7 +10,8 @@ class Recipe_Vegeterizer:
         self.instruction_normalizer = RecipeNormalizer()
 
     def vegeterize(self, recipe):
-        new_recipe, substitute_dict = self.cs.generate_substitutes_in_recipe(recipe_text)
+        new_recipe, substitute_dict = self.cs.generate_substitutes_in_recipe(recipe)
+        print(substitute_dict)
         return new_recipe, substitute_dict
 
 

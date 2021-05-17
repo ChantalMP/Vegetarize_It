@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title> Vegetarize it!</title>
+    </head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <body>
+        <h1> Vegetarize it! </h1>
+        {% if old_recipe %}
+            <p> Your recipe: {{old_recipe}} </p>
+            <form action="" method="post" novalidate>
+                <p>{{ reset_form.reset() }}</p>
+            </form>
+        {% else %}
+            <h3> Please input your recipe: </h3>
+            <form action="" method="post" novalidate>
+                {{ submit_form.hidden_tag() }}
+                <p>
+                    {{ submit_form.recipe.label }}<br>
+                    {{ submit_form.recipe(rows='10',cols='100') }}
+                </p>
+                <p>{{ submit_form.vegetarize() }}</p>
+            </form>
+        {% endif %}
+        <h3> Here is your adapted recipe: </h3>
+        {% if new_recipe %}
+        <p> {{new_recipe}} </p>
+        <h4> We recommend to replace the following ingredients: </h4>
+        {% for elem in replacements %}
+            <li><a> {{ elem.ingr }} <span>&#8594;</span> {{ elem.r }}</a></li>
+        {% endfor %}
+        {% else %}
+        <p> Your vegetarized recipe is only one click away! </p>
+        {% endif %}
+    </body>
+</html>
