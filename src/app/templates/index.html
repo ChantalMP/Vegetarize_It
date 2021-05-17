@@ -23,7 +23,7 @@
         {% endif %}
         <h3> Here is your adapted recipe: </h3>
         {% if new_recipe %}
-        <p> {{new_recipe}} </p>
+        <p> {{new_recipe|safe}} </p>
         <h4> We recommend to replace the following ingredients: </h4>
         {% for elem in replacements %}
             <li><a> {{ elem.ingr }} <span>&#8594;</span> {{ elem.r }}</a></li>

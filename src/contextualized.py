@@ -131,7 +131,7 @@ class ContextualizedSubstitutes:
 
         return joined_predictions_per_meat
 
-    def generate_substitutes_in_recipe(self, recipe_text):
+    def generate_substitutes_in_recipe(self, recipe_text, prefix="", suffix=""):
         substitutes_per_meat = self.generate_substitute_in_text(recipe_text)
 
         # normalize sentence and ingredient_name
@@ -149,7 +149,7 @@ class ContextualizedSubstitutes:
             # replace occurences
             recipe_text = recipe_text.replace('!', ' !').replace('?', ' ?').replace('.', ' .').replace(':', ' :').replace(',', ' ,')
             recipe_text = ' ' + recipe_text + ' '
-            recipe_text = recipe_text.replace(f' {ingredient_to_replace} ', f' {substitute} ')
+            recipe_text = recipe_text.replace(f' {ingredient_to_replace} ', f' {prefix + substitute + suffix} ')
             recipe_text = recipe_text.replace(' !', '!').replace(' ?', '?').replace(' .', '.').replace(' :', ':').replace(' ,', ',')
             ingredient_to_replace = ingredient_to_replace.replace('_', ' ')
             substitute = substitute.replace('_', ' ')
